@@ -1,8 +1,11 @@
 package com.springCourse.OneToManyJpaMapping.dao;
 
+import com.springCourse.OneToManyJpaMapping.entity.Course;
 import com.springCourse.OneToManyJpaMapping.entity.Instructor;
 import com.springCourse.OneToManyJpaMapping.entity.InstructorDetail;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface AppDAO {
@@ -15,4 +18,7 @@ public interface AppDAO {
     InstructorDetail findInstructorDetailById(int theId);
 
     void deleteInstructorDetailById(int theId);
+
+    List<Course> findCoursesByInstructorId(int theId);
+
 }

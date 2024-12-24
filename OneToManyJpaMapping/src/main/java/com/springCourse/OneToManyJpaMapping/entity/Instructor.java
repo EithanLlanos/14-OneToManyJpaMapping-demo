@@ -9,8 +9,8 @@ import java.util.List;
 @Table(name = "instructor")
 public class Instructor {
     //    Annotate the class as an entity and map to db table
-//    Define the fields
-//    Annotate the fields with db column names
+    //    Define the fields
+    //    Annotate the fields with db column names
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,7 +31,7 @@ public class Instructor {
     private InstructorDetail instructorDetail;
 
     //    Set up mapping to course entity
-    @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Course> courses;
 
 //    Create constructors

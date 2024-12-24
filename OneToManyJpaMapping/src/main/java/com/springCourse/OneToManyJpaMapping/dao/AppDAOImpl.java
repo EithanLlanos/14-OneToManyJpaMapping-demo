@@ -1,10 +1,14 @@
 package com.springCourse.OneToManyJpaMapping.dao;
 
+import com.springCourse.OneToManyJpaMapping.entity.Course;
 import com.springCourse.OneToManyJpaMapping.entity.Instructor;
 import com.springCourse.OneToManyJpaMapping.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class AppDAOImpl implements AppDAO {
@@ -59,5 +63,18 @@ public class AppDAOImpl implements AppDAO {
 
 //        Delete the Instructor Detail
         entityManager.remove(tempInstructorDetail);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int theId) {
+//        Create query
+        TypedQuery<Course> query = entityManager.createQuery(
+                "from Course where instructor.id=:data", Course.class
+        );
+        query.setParameter("data", theId);
+
+//        Execute the query
+        List<Course> courses = query.getResultList();
+        return courses;
     }
 }
