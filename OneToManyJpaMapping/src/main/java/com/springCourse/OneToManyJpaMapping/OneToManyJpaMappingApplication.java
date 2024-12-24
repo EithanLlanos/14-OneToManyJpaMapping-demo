@@ -28,9 +28,19 @@ public class OneToManyJpaMappingApplication {
 //            deleteInstructorDetail(appDAO);
 //            createInstructorWithCourses(appDAO);
 //            findInstructorWithCourses(appDAO);
-            findCoursesForInstructor(appDAO);
-
+//            findCoursesForInstructor(appDAO);
+            findInstructorWithCoursesJoinFetch(appDAO);
         };
+    }
+
+    private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+        int theId = 3;
+//        Find instructor
+        System.out.println("Finding instructor: " + theId);
+        Instructor tempInstructor = appDAO.findInstructorByIdJoinFetch(theId);
+//
+        System.out.println("tempInstructor: " + tempInstructor);
+        System.out.println("Associated courses " + tempInstructor.getCourses());
     }
 
     private void findCoursesForInstructor(AppDAO appDAO) {
@@ -60,15 +70,15 @@ public class OneToManyJpaMappingApplication {
 
     private void createInstructorWithCourses(AppDAO appDAO) {
 //        Create the Instructor
-        Instructor tempInstructor = new Instructor("Susan", "Public", "susan.public@luv2code.com");
+        Instructor tempInstructor = new Instructor("Troch", "Pinetas", "susan.public@luv2code.com");
 //        Create the Instructor Detail
         InstructorDetail tempInstructorDetail = new InstructorDetail("http://youtube.com", "Guitar");
 //        Associate the objects
         tempInstructor.setInstructorDetail(tempInstructorDetail);
 
 //        Create some courses
-        Course tempCourse1 = new Course("All Guitar - The ultimate guide");
-        Course tempCourse2 = new Course("The Pinball Masterclass");
+        Course tempCourse1 = new Course("All Piano - The ultimate guide");
+        Course tempCourse2 = new Course("The Ball Masterclass");
 //        Add courses to instructor
         tempInstructor.add(tempCourse1);
         tempInstructor.add(tempCourse2);
