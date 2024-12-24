@@ -31,7 +31,8 @@ public class OneToManyJpaMappingApplication {
 //            findCoursesForInstructor(appDAO);
 //            findInstructorWithCoursesJoinFetch(appDAO);
 //            updateInstructor(appDAO);
-            updateCourse(appDAO);
+//            updateCourse(appDAO);
+            deleteInstructor(appDAO);
         };
     }
 
@@ -45,6 +46,7 @@ public class OneToManyJpaMappingApplication {
 
         appDAO.update(tempCourse);
     }
+
 
     private void updateInstructor(AppDAO appDAO) {
         int theId = 1;
@@ -102,8 +104,8 @@ public class OneToManyJpaMappingApplication {
         tempInstructor.setInstructorDetail(tempInstructorDetail);
 
 //        Create some courses
-        Course tempCourse1 = new Course("All Piano - The ultimate guide");
-        Course tempCourse2 = new Course("The Ball Masterclass");
+        Course tempCourse1 = new Course("All Piano 2- The ultimate guide");
+        Course tempCourse2 = new Course("The Ball Masterclass 2");
 //        Add courses to instructor
         tempInstructor.add(tempCourse1);
         tempInstructor.add(tempCourse2);
@@ -123,6 +125,7 @@ public class OneToManyJpaMappingApplication {
 
     private void findInstructorDetail(AppDAO appDAO) {
         int theId = 1;
+
         System.out.println("Finding instructor detail id: " + theId);
         InstructorDetail tempInstructorDetail = appDAO.findInstructorDetailById(theId);
         System.out.println("tempInstructorDetail: " + tempInstructorDetail);
@@ -130,7 +133,7 @@ public class OneToManyJpaMappingApplication {
     }
 
     private void deleteInstructor(AppDAO appDAO) {
-        int theId = 2;
+        int theId = 5;
         appDAO.deleteInstructorById(theId);
     }
 
