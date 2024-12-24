@@ -29,8 +29,21 @@ public class OneToManyJpaMappingApplication {
 //            createInstructorWithCourses(appDAO);
 //            findInstructorWithCourses(appDAO);
 //            findCoursesForInstructor(appDAO);
-            findInstructorWithCoursesJoinFetch(appDAO);
+//            findInstructorWithCoursesJoinFetch(appDAO);
+            updateInstructor(appDAO);
         };
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+        int theId = 1;
+//        Find the instructor
+        System.out.println("Finding instructor id: " + theId);
+        Instructor tempInstructor = appDAO.findInstructorById(theId);
+//        Update the instructor
+        System.out.println("Update instructor id: " + theId);
+        tempInstructor.setLastName("Tester");
+        appDAO.update(tempInstructor);
+        
     }
 
     private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
