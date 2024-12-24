@@ -24,12 +24,11 @@ public class Course {
 
     }
 
-    public Course(int id, String title) {
-        this.id = id;
+    public Course(String title) {
         this.title = title;
     }
 
-    //    Define getters and setters
+//    Define getters and setters
 
     public int getId() {
         return id;
