@@ -1,6 +1,7 @@
 package com.springCourse.OneToManyJpaMapping;
 
 import com.springCourse.OneToManyJpaMapping.dao.AppDAO;
+import com.springCourse.OneToManyJpaMapping.entity.Course;
 import com.springCourse.OneToManyJpaMapping.entity.Instructor;
 import com.springCourse.OneToManyJpaMapping.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +19,36 @@ public class OneToManyJpaMappingApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            deleteInstructorDetail(appDAO);
+//            createInstructor(appDAO);
+//            findInstructor(appDAO);
+//            deleteInstructor(appDAO);
+//            findInstructorDetail(appDAO);
+//            deleteInstructorDetail(appDAO);
+            createInstructorWithCourses(appDAO);
         };
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+//        Create the Instructor
+        Instructor tempInstructor = new Instructor("Susan", "Public", "susan.public@luv2code.com");
+//        Create the Instructor Detail
+        InstructorDetail tempInstructorDetail = new InstructorDetail("http://youtube.com", "Guitar");
+//        Associate the objects
+        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+//        Create some courses
+        Course tempCourse1 = new Course("All Guitar - The ultimate guide");
+        Course tempCourse2 = new Course("The Pinball Masterclass");
+//        Add courses to instructor
+        tempInstructor.add(tempCourse1);
+        tempInstructor.add(tempCourse2);
+//        Save the instructor
+//        This will ALSO save the courses
+//        Because of CascadeType.PERSIST
+        System.out.println("Saving instructor: " + tempInstructor);
+        System.out.println("The courses: " + tempInstructor.getCourses());
+        appDAO.save(tempInstructor);
+        System.out.println("Done");
     }
 
     private void deleteInstructorDetail(AppDAO appDAO) {
