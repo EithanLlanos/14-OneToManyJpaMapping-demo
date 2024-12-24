@@ -4,30 +4,30 @@ package com.springCourse.OneToManyJpaMapping.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="instructor_detail")
+@Table(name = "instructor_detail")
 public class InstructorDetail {
 //    Annotate the class as an entity and map to db table
 //    Define the fields
 //    Annotate the fields with db column name
 
-//    Here you define if you want to use cascade in any method, in this example
+    //    Here you define if you want to use cascade in any method, in this example
 //    it will use cascade in all implemented methods except delete)
-    @OneToOne(mappedBy="instructorDetail", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToOne(mappedBy = "instructorDetail", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="youtube_channel")
+    @Column(name = "youtube_channel")
     private String youtubeChannel;
 
-    @Column(name="hobby")
+    @Column(name = "hobby")
     private String hobby;
 
     // Create constructors
-    public InstructorDetail(){
+    public InstructorDetail() {
 
     }
 
@@ -73,7 +73,6 @@ public class InstructorDetail {
     @Override
     public String toString() {
         return "InstructorDetail{" +
-                "instructor=" + instructor +
                 ", id=" + id +
                 ", youtubeChannel='" + youtubeChannel + '\'' +
                 ", hobby='" + hobby + '\'' +
