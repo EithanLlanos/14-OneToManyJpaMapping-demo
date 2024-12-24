@@ -32,8 +32,16 @@ public class OneToManyJpaMappingApplication {
 //            findInstructorWithCoursesJoinFetch(appDAO);
 //            updateInstructor(appDAO);
 //            updateCourse(appDAO);
-            deleteInstructor(appDAO);
+//            deleteInstructor(appDAO);
+            deleteCourse(appDAO);
+
         };
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+        int theId = 11;
+//        Find the course
+        appDAO.deleteCourseById(theId);
     }
 
     private void updateCourse(AppDAO appDAO) {
