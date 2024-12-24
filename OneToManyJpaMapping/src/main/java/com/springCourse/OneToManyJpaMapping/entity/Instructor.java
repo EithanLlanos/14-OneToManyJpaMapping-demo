@@ -2,34 +2,41 @@ package com.springCourse.OneToManyJpaMapping.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "instructor")
 public class Instructor {
-//    Annotate the class as an entity and map to db table
+    //    Annotate the class as an entity and map to db table
 //    Define the fields
 //    Annotate the fields with db column names
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-//    Set up mapping to InstructorDetail entity
+    //    Set up mapping to InstructorDetail entity
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="instructor_detail_id")
+    @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
+
+    //    Set up mapping to course entity
+    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Course> courses;
 
 //    Create constructors
 
-    public Instructor(){
+    public Instructor() {
 
     }
 
@@ -81,6 +88,14 @@ public class Instructor {
         this.instructorDetail = instructorDetail;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     // Generate toString() method
 
     @Override
@@ -92,5 +107,14 @@ public class Instructor {
                 ", email='" + email + '\'' +
                 ", instructorDetail=" + instructorDetail +
                 '}';
+    }
+
+    // Add convenience method for bidirectional relationship
+    public void add(Course tempCourse) {
+        if (courses == null) {
+            courses = new ArrayList<>();
+        }
+        courses.add(tempCourse);
+        tempCourse.setInstructor(this);
     }
 }
