@@ -23,8 +23,16 @@ public class OneToManyJpaMappingApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
 //            createCourseAndReviews(appDAO);
-            retrieveCourseAndReviews(appDAO);
+//            retrieveCourseAndReviews(appDAO);
+            deleteCourseAndReviews(appDAO);
         };
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int theId = 10;
+        System.out.println("Deleting course " + theId);
+//        Will delete course and associated reviews
+        appDAO.deleteCourseById(theId);
     }
 
     private void retrieveCourseAndReviews(AppDAO appDAO) {
