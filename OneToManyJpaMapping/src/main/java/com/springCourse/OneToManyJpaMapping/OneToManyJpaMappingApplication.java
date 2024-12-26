@@ -4,6 +4,7 @@ import com.springCourse.OneToManyJpaMapping.dao.AppDAO;
 import com.springCourse.OneToManyJpaMapping.entity.Course;
 import com.springCourse.OneToManyJpaMapping.entity.Instructor;
 import com.springCourse.OneToManyJpaMapping.entity.InstructorDetail;
+import com.springCourse.OneToManyJpaMapping.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,21 +22,36 @@ public class OneToManyJpaMappingApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-//            createInstructor(appDAO);
-//            findInstructor(appDAO);
-//            deleteInstructor(appDAO);
-//            findInstructorDetail(appDAO);
-//            deleteInstructorDetail(appDAO);
-//            createInstructorWithCourses(appDAO);
-//            findInstructorWithCourses(appDAO);
-//            findCoursesForInstructor(appDAO);
-//            findInstructorWithCoursesJoinFetch(appDAO);
-//            updateInstructor(appDAO);
-//            updateCourse(appDAO);
-//            deleteInstructor(appDAO);
-            deleteCourse(appDAO);
-
+//            createCourseAndReviews(appDAO);
+            retrieveCourseAndReviews(appDAO);
         };
+    }
+
+    private void retrieveCourseAndReviews(AppDAO appDAO) {
+
+        // Get course and reviews
+        int theId = 10;
+        Course tempCourse = appDAO.findCourseAndReviewsByCourseId(theId);
+
+        // print the course
+
+        System.out.println(tempCourse);
+
+        // print the reviews
+
+        System.out.println(tempCourse.getReviews());
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+//        Create a course
+        Course tempCourse = new Course("Pacman - How to score one million points");
+//        Add some reviews
+        tempCourse.addReview(new Review("Great course"));
+        tempCourse.addReview(new Review("After all, good course"));
+        tempCourse.addReview(new Review("A really bad one"));
+//        Save the course
+        appDAO.saveCourse(tempCourse);
+        System.out.println();
     }
 
     private void deleteCourse(AppDAO appDAO) {
